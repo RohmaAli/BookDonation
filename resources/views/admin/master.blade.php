@@ -36,15 +36,23 @@
               <a href="" class="navbar-brand text-light d-block mx-auto text-center bottom-border my-3 mb-4">Book<br>Donation</a>
               <div class="bottom-border pb-3">
                 <img src="{{URL::to('/')}}/Main/images/user/hamza.jpg" width="40" class="rounded">
-                  <a href="" class="text-white">M Hamza</a>
+                  <a href="" class="text-white">{{Auth::user()->name}}</a>
               </div>
               <ul class="nav navbar-nav flex-column mt-4">
-                <li class="nav-item">
+              @hasrole('super_admin')
+                <li class="nav-item">  
                   <a href="{{route('admin-index')}}" class="nav-link text-white p-3 mb-2" id="admin"><i class="fas fa-home text-light fa-lg mr-3"></i>Dashboard</a>
                 </li>
+                @else
+                <li class="nav-item">  
+                  <a href="{{route('dashboard')}}" class="nav-link text-white p-3 mb-2" id="admin"><i class="fas fa-home text-light fa-lg mr-3"></i>Dashboard</a>
+                </li>
+              @endhasrole
+              @hasrole('super_admin')
                 <li class="nav-item">
                   <a href="{{route('mailbox')}}" id="mailbox" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-envelope text-light fa-lg mr-3"></i>Mailbox</a>
                 </li>
+             @endhasrole
                 <li class="nav-item">
                   <a href="{{route('category')}}" id="category" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-image text-light fa-lg mr-3"></i>Categories</a>
                 </li>
@@ -119,7 +127,7 @@
     <!-- Footer -->
 <footer>
   <div class="container-fluid text-center py-3">
-    <p class="m-0">Boo Donation | Developed by Hamza & Abdullah | 2020</p>
+    <p class="m-0">Book Donation | Developed by Hamza & Abdullah | 2020</p>
   </div>
 </footer>
         <!-- End of Footer -->

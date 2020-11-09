@@ -42,5 +42,14 @@ Route::get('/slider', 'AdminController@slider')->name('slider');
 Route::get('/user', 'AdminController@user')->name('user');
 
 
-Route::get('notes', 'NotesController@index');
- Route::get('pdf', 'NotesController@pdf');
+// Route::resource('books', 'BookController');
+// Route::get('books/{uuid}/download', 'BookController@download')->name('books.download');
+
+//customer routes
+Route::get('/index', 'CustomerController@index');
+Route::get('/customer/dashboard', 'CustomerController@dashboard')->name('dashboard');
+Route::post('/customer/delete/book', 'CustomerController@deleteBook')->name('delete');
+
+Route::get('/assignRole', function(){
+
+});
