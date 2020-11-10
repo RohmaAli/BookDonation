@@ -17,7 +17,9 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($books as $book)
+    @if($books ?? '')
+    @foreach($books ?? '' as $book)
+    {{$book}}
             <tr>
                 <th>1</th>
                 <td>{{$book->title}}</td>
@@ -25,6 +27,7 @@
                 <td><button type="button" class="badge btn-danger w-100 py-2" name="bookID" value="{{$book->id}}">Delete</button></td>
             </tr>
     @endforeach
+    @endif
     </tbody>
 </table>
 </form>

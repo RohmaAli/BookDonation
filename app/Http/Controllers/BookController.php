@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
+use Auth;
 use Webpatser\Uuid\Uuid;
 class BookController extends Controller
 {
@@ -36,13 +37,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $book = $request->all();
-        $book['uuid'] = (string)Uuid::generate();
-        if ($request->hasFile('cover')) {
-            $book['cover'] = $request->cover->getClientOriginalName();
+        $book = new Book();
+        $book->uuid = (string)Uuid::generate();
+        $user = Auth::user();
+        $book->user_id = $user->id;
+        $book->title = $request->title;
+        if ($request->hasFile('cover')) 
+        {
+            $book->cover = $request->cover->getClientOriginalName();
             $request->cover->storeAs('books', $book['cover']);
         }
-        Book::create($book);
+        $book->save();
         return redirect()->route('books.index');
     }
 

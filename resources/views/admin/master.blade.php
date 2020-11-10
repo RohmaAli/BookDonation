@@ -53,12 +53,26 @@
                   <a href="{{route('mailbox')}}" id="mailbox" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-envelope text-light fa-lg mr-3"></i>Mailbox</a>
                 </li>
              @endhasrole
+             @hasrole('super_admin')
                 <li class="nav-item">
                   <a href="{{route('category')}}" id="category" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-image text-light fa-lg mr-3"></i>Categories</a>
                 </li>
-                <li class="nav-item">
-                  <a href="{{route('books')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-book-reader text-light fa-lg mr-3"></i>Books</a>
+              @endhasrole
+              @hasrole('customer')
+              <li class="nav-item">
+                  <a href="{{route('c_category')}}" id="category" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-image text-light fa-lg mr-3"></i>Categories</a>
                 </li>
+              @endhasrole
+              @hasrole('customer')
+              <li class="nav-item">
+                  <a href="{{route('myBooks')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-book-reader text-light fa-lg mr-3"></i>Books</a>
+                </li>
+              @endhasrole
+              @hasrole('super_admin')
+                <li class="nav-item">
+                  <a href="{{route('allBooks')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-book-reader text-light fa-lg mr-3"></i>Books</a>
+                </li>
+              @endhasrole
                 <li class="nav-item">
                   <a href="{{route('slider')}}" id="slider" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-folder-plus text-light fa-lg mr-3"></i>Slider</a>
                 </li>
@@ -75,22 +89,28 @@
             <!-- Top Navigation Bar -->
             <div class="col-lg-10 col-xl-10 col-md-9 ml-auto bg-dark fixed-top py-2 top-navbar">
               <div class="row align-items-center">
+              @hasrole('super_admin')
                 <div class="col-md-4">
                   <h4 class="text-light text-uppercase mb-0">Admin Pannel</h4>
                 </div>
+                @else
+                <div class="col-md-4">
+                  <h4 class="text-light text-uppercase mb-0"></h4>
+                </div>
+                @endhasrole
                 <div class="col-md-5">
 
                 </div>
                 <div class="col-md-3">
                   <ul class="navbar-nav">
-                    <li class="nav-item icon-parent">
+                    <!-- <li class="nav-item icon-parent">
                       <a href="#" class="nav-link icon-bullet"><i class="fas fa-comments fa-lg text-muted"></i></a>
                     </li>
                     <li class="nav-item icon-parent">
                       <a href="#" class="nav-link icon-bullet"><i class="fas fa-bell fa-lg text-muted"></i></a>
-                    </li>
+                    </li> -->
                     <li class="nav-item ml-auto">
-                      <a href="#" class="nav-link text-muted font-weight-bold" data-toggle="modal" data-target="#sign-out">
+                      <a href="{{ route('logout') }}" class="nav-link text-muted font-weight-bold" data-toggle="modal" data-target="#sign-out">
                       <i class="fas fa-sign-out-alt fa-lg text-secondary"></i>Logout</a>
                     </li>
                   </ul>

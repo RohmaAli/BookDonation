@@ -37,18 +37,21 @@ Route::get('/stories', 'WelcomeController@stories')->name('stories');
 Route::get('/admin', 'AdminController@index')->middleware('auth')->name('admin-index');
 Route::get('/mailbox', 'AdminController@mailbox')->name('mailbox');
 Route::get('/category', 'AdminController@category')->name('category');
-Route::get('/books', 'AdminController@books')->name('books');
+Route::get('/allBooks', 'AdminController@books')->name('allBooks');
 Route::get('/slider', 'AdminController@slider')->name('slider');
 Route::get('/user', 'AdminController@user')->name('user');
 
-
-// Route::resource('books', 'BookController');
-// Route::get('books/{uuid}/download', 'BookController@download')->name('books.download');
+//book upload, download
+Route::resource('books', 'BookController@create');
+Route::get('books/{uuid}/download', 'BookController@download')->name('books.download');
 
 //customer routes
 Route::get('/index', 'CustomerController@index');
 Route::get('/customer/dashboard', 'CustomerController@dashboard')->name('dashboard');
 Route::post('/customer/delete/book', 'CustomerController@deleteBook')->name('delete');
+Route::get('/customer/category', 'CustomerController@category')->name('c_category');
+Route::get('/customer/myBooks', 'CustomerController@myBooks')->name('myBooks');
+Route::get('/customer/create/book', 'CustomerController@create')->name('create_book');
 
 Route::get('/assignRole', function(){
 
