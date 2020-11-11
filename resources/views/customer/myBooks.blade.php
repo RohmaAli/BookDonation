@@ -11,7 +11,11 @@
              <div class="col-lg-12 col-12 text-right mr-5 mb-3">
              <form action="{{route('create_book')}}" method="POST">
              @csrf
-             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#books">Add Books</button>
+             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#bookModal">Add Books</button>
+            <!-- Button trigger modal -->
+
+
+
              </form>
              </div>
              <div class="col-lg-12 col-xl-12 col-12 ml-auto">
@@ -85,8 +89,9 @@
    </section>
  <!-- end of Category -->
  <!-- Category modal -->
-   <div class="modal" id="books">
-     <div class="modal-dialog">
+  <!-- Modal -->
+<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel" aria-hidden="true">
+<div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header">
            <h3 class="modal-title">Upload Books</h3>
@@ -106,7 +111,7 @@
          </div>
        </div>
      </div>
-   </div>
+</div>
  <!-- end of category modal -->
 
     <script>
