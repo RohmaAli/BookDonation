@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Webpatser\Uuid\Uuid;
+use Auth;
+
 use App\User;
 use App\Book;
 
@@ -45,4 +48,22 @@ class CustomerController extends Controller
    {
        return view('books.create');
    }
+
+   public function store(Request $request)
+    {
+        // return $request;
+        $book = new Book();
+        $book->uuid = (string)Uuid::generate();
+        $user = Auth::user();
+        $book->user_id = $user->id;
+        $book->title = $request->title;
+        $book->category = $request->category;
+        if ($request->hasFile('cover')) 
+        {
+            $book->cover = $request->cover->getClientOriginalName();
+            $request->cover->storeAs('books', $book['cover']);
+        }
+        $book->save();
+        // return redirect()->route('books.index');
+    }
 }

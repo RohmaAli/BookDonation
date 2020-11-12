@@ -52,6 +52,10 @@ Route::post('/customer/delete/book', 'CustomerController@deleteBook')->name('del
 Route::get('/customer/category', 'CustomerController@category')->name('c_category');
 Route::get('/customer/myBooks', 'CustomerController@myBooks')->name('myBooks');
 Route::get('/customer/create/book', 'CustomerController@create')->name('create_book');
+Route::post('/customer/store/book', 'CustomerController@store')->name('store_book');
+
+// Route::resource('/customer/create/store', 'BookController@store', ['as' => 'store']);
+// Route::resource('store', 'BookController@store');
 
 Route::get('/assignRole', function(){
 

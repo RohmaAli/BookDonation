@@ -37,6 +37,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $book = new Book();
         $book->uuid = (string)Uuid::generate();
         $user = Auth::user();
@@ -48,7 +49,7 @@ class BookController extends Controller
             $request->cover->storeAs('books', $book['cover']);
         }
         $book->save();
-        return redirect()->route('books.index');
+        // return redirect()->route('books.index');
     }
 
     /**

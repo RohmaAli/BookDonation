@@ -1,8 +1,12 @@
 @extends("admin.master")
 
 @section("content")
+<head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
+</head>
 <!-- add Category -->
+
    <section>
      <div class="container-fluid">
        <div class="row">
@@ -98,12 +102,16 @@
            <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
          <div class="modal-body">
-           <form action="" method="post" enctype="multipart/form-data">
+           <form action="{{ route('store_book') }}" method="post" enctype="multipart/form-data">
+           @csrf
              <div class="form-group">
-               <input type="text" name="" class="form-control" placeholder="Title(e.g Milk)">
+               <input type="text" name="title" class="form-control" placeholder="Title(required)" required>
              </div>
              <div class="form-group">
-               <input type="file" name="" value="" class="form-control" id="exmapleInputFile" aria-describedby="fileHelp">
+               <input type="text" name="category" class="form-control" placeholder="Category(required)" required>
+             </div>
+             <div class="form-group">
+               <input type="file" name="cover" value="" class="form-control" id="exmapleInputFile" aria-describedby="fileHelp" required>
              </div>
              <input type="hidden" name="submit">
              <button type="submit" class="btn btn-success" width="20%">Upload</button>
@@ -118,5 +126,11 @@
     var element = document.getElementById("books");
     element.classList.add("current");
     </script>
-
+<script>
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});   
+</script>
     @endsection
