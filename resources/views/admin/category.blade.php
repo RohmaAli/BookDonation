@@ -8,90 +8,50 @@
        <div class="row">
          <div class="col-lg-10 col-xl-10 col-md-8 ml-auto mt-5">
            <div class="row">
-             <div class="col-lg-12 col-12 text-right mr-5 mb-3">
+             <!-- <div class="col-lg-12 col-12 text-right mr-5 mb-3">
                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addcategory">New Category</button>
-             </div>
+             </div> -->
              <div class="col-lg-12 col-xl-12 col-12 ml-auto">
                <!-- table -->
+               
                <h3 class="text-muted text-center mb-3 font-weight-bold">Categories</h3>
-
-
+               <a href="{{route('category.view')}}" class="btn btn-success" type="button"><i class="fa fa-plus"></i>Add Category</a>
+                <form action="{{route('category.actions')}}" method="post">
+                @csrf
                  <table class="table text-center table-dark table-hover">
                    <thead>
+                   @php
+                    $i = 0;
+                   @endphp
                      <tr class="text-muted">
                        <th>#</th>
-                       <th>Book Name</th>
-                       <th>Category</th>
-                       <th>Status</th>
+                       <!-- <th>Book Name</th> -->
+                       <th>Category title</th>
+                       <th>Description</th>
+                       <th>Action</th>
                      </tr>
                    </thead>
                    <tbody>
-                     <tr>
-                       <th>1</th>
-                       <td>c++</td>
-                       <td>Programming</td>
-                       <td><button type="button" class="badge btn-danger w-100 py-2">Pending</button></td>
-                     </tr>
-                     <tr>
-                       <th>2</th>
-                       <td>Financial Accounting</td>
-                       <td>Business</td>
-                       <td><button type="button" class="badge btn-danger w-100 py-2">Pending</button></td>
-                     </tr>
-                     <tr>
-                       <th>3</th>
-                       <td>Early Days</td>
-                       <td>Islamiat</td>
-                       <td><button type="button" class="badge btn-success w-100 py-2">Aproved</button></td>
-                     </tr>
-                     <tr>
-                       <th>4</th>
-                       <td>Algebra</td>
-                       <td>Mathamatics</td>
-                       <td><button type="button" class="badge btn-success w-100 py-2">Aproved</button></td>
-                     </tr>
-                     <tr>
-                       <th>5</th>
-                       <td>ECA</td>
-                       <td>Electical Engineering</td>
-                       <td><button type="button" class="badge btn-success w-100 py-2">Aproved</button></td>
-                     </tr>
+                   @if($categories)
+                      @foreach($categories as $category)
+                      <tr>
+                      <td>{{++$i}}</td>
+                        <td>{{$category->title}}</td>
+                        <td>{{$category->description}}</td>
+                        <td>
+                          <button class="btn" name="edit" value="{{$category->id}}"><i class="fa fa-edit"></i></button>
+                          <button class="btn" name="delete" value="{{$category->id}}"><i class="fa fa-trash"></i></button>
+                        </td>
+                      </tr>
+                      @endforeach
+                  @else
+                  <h4 style="color:red">no categories in database</h4>
+                   @endif
+                     
                    </tbody>
                  </table>
-                 <!-- pagination -->
-                 <nav>
-                   <ul class="pagination justify-content-center">
-                     <li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         <span>Previous</span>
-                       </a>
-                     </li>
-                     <li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3 nav-link active bg-info text-white">
-                         1
-                       </a>
-                     </li><li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         2
-                       </a>
-                     </li><li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         3
-                       </a>
-                     </li><li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         4
-                       </a>
-                     </li>
-                     <li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         <span>Next</span>
-                       </a>
-                     </li>
-                   </ul>
-                 </nav>
-                 <!-- end of pagination -->
-
+                </form>
+                
              </div>
            </div>
          </div>
@@ -123,22 +83,6 @@
      </div>
    </div>
  <!-- end of category modal -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <script>
     var element = document.getElementById("category");

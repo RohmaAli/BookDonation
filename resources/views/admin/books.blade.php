@@ -9,7 +9,12 @@
          <div class="col-lg-10 col-xl-10 col-md-8 ml-auto mt-5">
            <div class="row">
              <div class="col-lg-12 col-12 text-right mr-5 mb-3">
-               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#books">Add Books</button>
+             <form action="{{route('admin.viewAddBook')}}" method="get">
+             @csrf
+               <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#books"><i class="fa fa-plus"></i> Add Books</button> -->
+               <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addcategory"><i class="fa fa-plus"></i> Add Books</button> -->
+               <button type="submit" name="addBook" class="btn btn-success"><i class="fa fa-plus"></i> Add Books</button>
+
              </div>
              <div class="col-lg-12 col-xl-12 col-12 ml-auto">
                <!-- table -->
@@ -22,40 +27,28 @@
                        <th>#</th>
                        <th>Book Name</th>
                        <th>Category</th>
-                       <th>Status</th>
+                       <th>Action</th>
                      </tr>
                    </thead>
                    <tbody>
+                   @php
+                    $i = 0;
+                   @endphp
+                   @foreach($books as $book)
                      <tr>
-                       <th>1</th>
-                       <td>c++</td>
-                       <td>Programming</td>
-                       <td><button type="button" class="badge btn-success w-100 py-2">Approved</button></td>
-                     </tr>
-                     <tr>
-                       <th>2</th>
-                       <td>Financial Accounting</td>
-                       <td>Business</td>
-                       <td><button type="button" class="badge btn-success w-100 py-2">Approved</button></td>
-                     </tr>
-                     <tr>
-                       <th>3</th>
-                       <td>Early Days</td>
-                       <td>Islamiat</td>
-                       <td><button type="button" class="badge btn-success w-100 py-2">Aproved</button></td>
-                     </tr>
-                     <tr>
-                       <th>4</th>
-                       <td>Algebra</td>
-                       <td>Mathamatics</td>
-                       <td><button type="button" class="badge btn-success w-100 py-2">Aproved</button></td>
-                     </tr>
-                     <tr>
-                       <th>5</th>
-                       <td>ECA</td>
-                       <td>Electical Engineering</td>
-                       <td><button type="button" class="badge btn-success w-100 py-2">Aproved</button></td>
-                     </tr>
+                      <td>{{++$i}}</td>
+                       <td>{{$book->title}}</td>
+                       <td>{{$book->category->title}}</td>
+                       <td></td>
+                       <td>
+                       <a href="{{ url('/admin/download/book', $book->uuid) }}" type="button" class="btn btn-success"><i class="fa fa-download"></i></a>
+                       <a href="{{ url('/admin/delete/book', $book->id) }}" type="button" class="btn btn-success"><i class="fa fa-trash"></i></a>
+
+                          <!-- <button class="btn" name="delete" value=""><i class="fa fa-trash"></i></button> -->
+                        </td>                     
+                      </tr>
+                    @endforeach
+                    
                    </tbody>
                  </table>
                  <!-- pagination -->
@@ -100,11 +93,11 @@
    </section>
  <!-- end of Category -->
  <!-- Category modal -->
-   <div class="modal" id="books">
+ <div class="modal" id="addcategory">
      <div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header">
-           <h3 class="modal-title">Upload Books</h3>
+           <h3 class="modal-title">Upload Image</h3>
            <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
          <div class="modal-body">
@@ -123,6 +116,7 @@
      </div>
    </div>
  <!-- end of category modal -->
+
 
 
 

@@ -110,10 +110,27 @@
                     <li class="nav-item icon-parent">
                       <a href="#" class="nav-link icon-bullet"><i class="fas fa-bell fa-lg text-muted"></i></a>
                     </li> -->
-                    <li class="nav-item ml-auto">
+                    <!-- <li class="nav-item ml-auto">
                       <a href="{{ route('logout') }}" class="nav-link text-muted font-weight-bold" data-toggle="modal" data-target="#sign-out">
                       <i class="fas fa-sign-out-alt fa-lg text-secondary"></i>Logout</a>
-                    </li>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                   </ul>
                 </div>
               </div>
@@ -135,7 +152,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" name="button" class="btn btn-success" data-dismiss="modal">Stay Here</button>
-              <a href="" class="btn btn-danger">Logout</a>
+              <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
 
             </div>
           </div>

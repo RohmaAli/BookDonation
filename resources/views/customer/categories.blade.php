@@ -20,21 +20,24 @@
                    <thead>
                      <tr class="text-muted">
                        <th>#</th>
-                       <th>Book Name</th>
                        <th>Category</th>
-                       <th>Status</th>
+                        
+                        <th>No. of Books</th>
+                       <th>View</th>
                      </tr>
                    </thead>
                    <tbody>
                    @php
                    $i = 0;
                    @endphp
-                   @foreach($books as $book)
+                   @foreach($categories as $cat)
                      <tr>
                        <th>{{++$i}}</th>
-                       <td>{{$book->title}}</td>
-                       <td>{{$book->category}}</td>
-                       <td><button type="button" class="badge btn-danger w-100 py-2">Pending</button></td>
+                       <td>{{$cat->title}}</td>
+                       <td>{{$cat->books->count()}}</td>
+                       <!-- <td><button type="button" class="badge btn-danger w-100 py-2">Pending</button></td> -->
+                        <td><a href="{{url('/customer/view/categorywise/books',$cat->id)}}" type="button" class="btn btn-success"> <i class="fa fa-eye"></i>
+                        </a></td>
                      </tr>
                      @endforeach
                      

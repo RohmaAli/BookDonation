@@ -18,7 +18,7 @@ class CreateBooksTable extends Migration
             $table->uuid('uuid')->nullable();
             $table->string('title');
             $table->string('cover')->nullable();
-            $table->string('category')->nullable();
+            $table->integer('category_id')->nullable();
             $table->integer('user_id')->nullable();
             $table->timestamps();
         });
