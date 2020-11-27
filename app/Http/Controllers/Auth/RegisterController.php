@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Customer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -71,6 +72,11 @@ class RegisterController extends Controller
         ]);
         $user->AssignRole('customer');
         $user->save();
+        $customer = new Customer();
+        $customer->name = $data['name'];
+        $customer->email = $data['email'];
+        $customer->save();
+        $customer->user()->save($user);
         return $user;
     }
 }

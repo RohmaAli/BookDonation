@@ -9,56 +9,47 @@
          <div class="col-lg-10 col-xl-10 col-md-8 ml-auto mt-5">
            <div class="row">
              <div class="col-lg-12 col-12 text-right mr-5 mb-3">
-             <form action="" method="get">
-             @csrf
-               
+             <form action="{{route('admin.requestAction')}}" method="POST">
+            @csrf
              </div>
              <div class="col-lg-12 col-xl-12 col-12 ml-auto">
                <!-- table -->
-               <!-- <h3 class="text-muted text-center mb-3 font-weight-bold">New Books</h3> -->
+               <h3 class="text-muted text-center mb-3 font-weight-bold">Manage Request</h3>
 
-               <h4><center>category: {{$category->title}}</center></h4>
+
                  <table class="table text-center table-dark table-hover">
                    <thead>
                      <tr class="text-muted">
                        <th>#</th>
                        <th>Book Name</th>
-                       <!-- <th>Category</th> -->
-                       <th>Request</th>
+                       <th>Customer Name</th>
+                       <th>Action</th>
                      </tr>
                    </thead>
                    <tbody>
                    @php
                     $i = 0;
+                    auth()->user()->notifications()
                    @endphp
-                   @foreach($books as $book)
+                   
+                   @foreach(auth()->user()->notifications as $notification)
                      <tr>
                       <td>{{++$i}}</td>
-                       <td>{{$book->title}}</td>
-                       <!-- <td>{{$book->category}}</td> -->
-                       <!-- <td></td> -->
+                       <td>{{$notification->data['bookTitle']}}</td>
+                       <td>{{$notification->data['customer']}} </td>
+                       
                        <td>
-                       @php
-                       $pivotData =  \DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', Auth::user()->id)->get();
-                        if($pivotData->count() == 0)
-                        {
-                          $permission = 0;
-                        }
-                        else{
-                          foreach($pivotData as $d)
-                          {
-                            $permission = $d->hasPermission;
-                          }
-                        }
-                       @endphp
-                       @if($permission == 0)
-                        <a href="{{ url('/customer/request/book', $book->id) }}" type="button" class="btn btn-success"><i class="fas fa-share"></i></a>
-                          @elseif($permission == 1)
-                          <a href="{{ url('/customer/download/book', $book->uuid) }}" type="button" class="btn btn-success"><i class="fa fa-download"></i></a>
-                        @endif
+                       <!-- <a href="{{url('/admin/request/actions', $notification->data['bookId'], $notification->data['customerId'] )}}" type="button"  class="btn btn-success"><i class="fas fa-check"></i>Allow</a> -->
+                          <input type="hidden" name="cid" value="{{$notification->data['customerId']}}">
+                          <button class="btn btn-success" type="submit" name="allow" value="{{$notification->data['bookId']}}"><i class="fas fa-check"></i>Allow</button>
+                          <button class="btn btn-danger" type="submit" name="deny" value="{{$notification->data['bookId']}}"><i class="fas fa-times"></i> Deny</button>
+
+                          <!-- <a href="" type="button" class="btn btn-danger"><i class="fas fa-times"></i> Deny</a> -->
+
                         </td>                     
                       </tr>
-                    @endforeach
+                    @endforeach  
+                    
                     
                    </tbody>
                  </table>
@@ -127,22 +118,6 @@
      </div>
    </div>
  <!-- end of category modal -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <script>

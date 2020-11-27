@@ -49,11 +49,11 @@
                   <a href="{{route('dashboard')}}" class="nav-link text-white p-3 mb-2" id="admin"><i class="fas fa-home text-light fa-lg mr-3"></i>Dashboard</a>
                 </li>
               @endhasrole
-              @hasrole('super_admin')
+              <!-- @hasrole('super_admin')
                 <li class="nav-item">
                   <a href="{{route('mailbox')}}" id="mailbox" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-envelope text-light fa-lg mr-3"></i>Mailbox</a>
                 </li>
-             @endhasrole
+             @endhasrole -->
              @hasrole('super_admin')
                 <li class="nav-item">
                   <a href="{{route('category')}}" id="category" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-image text-light fa-lg mr-3"></i>Categories</a>
@@ -69,11 +69,19 @@
                   <a href="{{route('myBooks')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-book-reader text-light fa-lg mr-3"></i>Books</a>
                 </li>
               @endhasrole
+              
               @hasrole('super_admin')
                 <li class="nav-item">
                   <a href="{{route('allBooks')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-book-reader text-light fa-lg mr-3"></i>Books</a>
                 </li>
               @endhasrole
+              @hasrole('super_admin')
+
+              <li class="nav-item">
+                  <a href="{{route('admin.viewRequest')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-share text-light fa-lg mr-3"></i>Requests</a>
+                </li>
+                @endhasrole
+
                 <li class="nav-item">
                   <a href="{{route('slider')}}" id="slider" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-folder-plus text-light fa-lg mr-3"></i>Slider</a>
                 </li>
@@ -114,8 +122,36 @@
                       <a href="{{ route('logout') }}" class="nav-link text-muted font-weight-bold" data-toggle="modal" data-target="#sign-out">
                       <i class="fas fa-sign-out-alt fa-lg text-secondary"></i>Logout</a>
                     </li> -->
+                  @auth
+                    <li>
+
+                    <div class="dropdown for-notification">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
+                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <i class="fa fa-bell"></i>
+                                  <span class="count">{{auth()->user()->notifications()->count()}}</span>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="notification" style="overflow-y: scroll;height: 50vh">
+                        <p ><center style="color:green">You have {{auth()->user()->notifications()->count()}} Notifications</center></p>
+                        @foreach(auth()->user()->notifications as $notification)
+                                <a class="dropdown-item media" href="{{route('admin.viewRequest')}}">
+                                    <i class="fa fa-check"></i>
+                                    <div class="">
+
+                                        <p style="text-transform: uppercase;"><b>{{$notification->data['bookTitle']}}</b>
+                                        </p>
+                                        <p>{{$notification->data['customer']}}</p>
+                                        <p>{{$notification->data['message']}}</p>
+                                        <hr>
+                                    </div>
+                                </a>
+                                @endforeach
+                      </div><!--end dropdown-menu-->
+                    </div> <!--end dropdown for-notification-->
+                    </li>
+                    @endauth
                     <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" style="color:white" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -131,6 +167,7 @@
                                     </form>
                                 </div>
                             </li>
+                           
                   </ul>
                 </div>
               </div>

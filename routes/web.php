@@ -45,10 +45,12 @@ Route::post('/admin/store/category','AdminController@storeCategory')->name('cate
 Route::post('/admin/actions/category', 'AdminController@catActions')->name('category.actions');
 Route::post('/admin/actions/category/edit', 'AdminController@editCategory')->name('category.edit');
 Route::get('/admin/view/add/book', 'AdminController@viewAddBookAdmin')->name('admin.viewAddBook');
-
 Route::post('/admin/store/book', 'AdminController@storeBookAdmin')->name('admin.store_book');
 Route::get('/admin/download/book/{uuid}', 'AdminController@downloadBookAdmin')->name('admin.downloadBook');
 Route::get('/admin/delete/book/{id}', 'AdminController@deleteBookAdmin')->name('admin.deleteBook');
+Route::get('/admin/view/request', 'AdminController@viewRequestAdmin')->name('admin.viewRequest');
+Route::post('/admin/request/actions','AdminController@requestAction')->name('admin.requestAction');
+
 
 });
 
@@ -67,7 +69,7 @@ Route::post('/customer/store/book', 'CustomerController@storeBook')->name('store
 Route::get('/customer/view/add/book', 'CustomerController@viewAddBook')->name('customer.viewAddBook');
 Route::get('/customer/download/book/{uuid}', 'CustomerController@downloadBook')->name('customer.downloadBook');
 Route::get('/customer/delete/book/{id}', 'CustomerController@deleteBook')->name('customer.deleteBook');
-Route::get('/customer/view/categorywise/books/{id}','CustomerController@catwiseBook');
+Route::get('/customer/view/categorywise/books/{id}','CustomerController@catwiseBook')->name('viewCatwiseBook');
 Route::get('/customer/request/book/{id}', 'CustomerController@requestBook')->name('customer.reqBook');
 
 });

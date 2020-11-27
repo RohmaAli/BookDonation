@@ -8,7 +8,8 @@ use Webpatser\Uuid\Uuid;
 use App\Book;
 use App\User;
 use Auth;
-
+use DB;
+use App\Customer;
 class AdminController extends Controller
 {
   public function admin()
@@ -85,9 +86,6 @@ class AdminController extends Controller
    {    
     $categories = Category::all();
         return view('admin.viewAddBook', compact('categories'));
-
-      
-       
    }
   public function storeBookAdmin(Request $request)
   {
@@ -123,6 +121,25 @@ class AdminController extends Controller
         $book = Book::where('uuid', $uuid)->firstOrFail();
         $pathToFile = storage_path('app/books/' . $book->cover);
         return response()->download($pathToFile);
+
+    }
+
+    public function viewRequestAdmin()
+    {
+      return view('admin.viewRequest');
+    }
+
+    public function requestAction(Request $request)
+    {
+      if($request->allow)
+      {
+        $book = Book::find($request->allow);
+        $customer = Customer::find($request->cid);
+        $pivotData =  DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', $customer->id)->update(['hasPermission' => 1]);
+        
+        
+      }
+      
 
     }
 
