@@ -33,6 +33,7 @@
                    @endphp
                    
                    @foreach(auth()->user()->notifications as $notification)
+                   @if($notification->read_at == null)
                      <tr>
                       <td>{{++$i}}</td>
                        <td>{{$notification->data['bookTitle']}}</td>
@@ -41,51 +42,23 @@
                        <td>
                        <!-- <a href="{{url('/admin/request/actions', $notification->data['bookId'], $notification->data['customerId'] )}}" type="button"  class="btn btn-success"><i class="fas fa-check"></i>Allow</a> -->
                           <input type="hidden" name="cid" value="{{$notification->data['customerId']}}">
+                          <input type="hidden" name="nid" value="{{$notification->id}}">
+                          
                           <button class="btn btn-success" type="submit" name="allow" value="{{$notification->data['bookId']}}"><i class="fas fa-check"></i>Allow</button>
                           <button class="btn btn-danger" type="submit" name="deny" value="{{$notification->data['bookId']}}"><i class="fas fa-times"></i> Deny</button>
-
+                          
                           <!-- <a href="" type="button" class="btn btn-danger"><i class="fas fa-times"></i> Deny</a> -->
 
                         </td>                     
                       </tr>
-                    @endforeach  
+                      @endif
+                      @endforeach  
                     
                     
                    </tbody>
                  </table>
-                 <!-- pagination -->
-                 <nav>
-                   <ul class="pagination justify-content-center">
-                     <li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         <span>Previous</span>
-                       </a>
-                     </li>
-                     <li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3 nav-link active bg-info text-white">
-                         1
-                       </a>
-                     </li><li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         2
-                       </a>
-                     </li><li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         3
-                       </a>
-                     </li><li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         4
-                       </a>
-                     </li>
-                     <li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         <span>Next</span>
-                       </a>
-                     </li>
-                   </ul>
-                 </nav>
-                 <!-- end of pagination -->
+                 
+                 
 
              </div>
            </div>

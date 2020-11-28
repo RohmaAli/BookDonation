@@ -13,12 +13,21 @@
              @csrf
                <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#books"><i class="fa fa-plus"></i> Add Books</button> -->
                <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addcategory"><i class="fa fa-plus"></i> Add Books</button> -->
-               <button type="submit" name="addBook" class="btn btn-success"><i class="fa fa-plus"></i> Add Books</button>
+               <!-- <button type="submit" name="addBook" class="btn btn-success"><i class="fa fa-plus"></i> Add Books</button> -->
 
              </div>
              <div class="col-lg-12 col-xl-12 col-12 ml-auto">
                <!-- table -->
-               <h3 class="text-muted text-center mb-3 font-weight-bold">New Books</h3>
+               <div class="row">
+                <div class="col-md-1">
+                <button type="submit" name="addBook" class="btn btn-success"><i class="fa fa-plus"></i> Add Books</button>
+                </div>
+                <div class="col-md-11">
+                <h3 style="margin-left:0px" class="text-muted text-center mb-3 font-weight-bold">New Books</h3>
+
+                </div>
+               </div>
+               <!-- <h3 class="text-muted text-center mb-3 font-weight-bold">New Books</h3> -->
 
 
                  <table class="table text-center table-dark table-hover">
@@ -50,40 +59,9 @@
                     @endforeach
                     
                    </tbody>
+                   
                  </table>
-                 <!-- pagination -->
-                 <nav>
-                   <ul class="pagination justify-content-center">
-                     <li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         <span>Previous</span>
-                       </a>
-                     </li>
-                     <li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3 nav-link active bg-info text-white">
-                         1
-                       </a>
-                     </li><li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         2
-                       </a>
-                     </li><li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         3
-                       </a>
-                     </li><li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         4
-                       </a>
-                     </li>
-                     <li class="nav-item">
-                       <a href="#" class="page-link py-2 px-3">
-                         <span>Next</span>
-                       </a>
-                     </li>
-                   </ul>
-                 </nav>
-                 <!-- end of pagination -->
+                 {{$books->links()}}
 
              </div>
            </div>

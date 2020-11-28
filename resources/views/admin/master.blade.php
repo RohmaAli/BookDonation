@@ -66,7 +66,7 @@
               @endhasrole
               @hasrole('customer')
               <li class="nav-item">
-                  <a href="{{route('myBooks')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-book-reader text-light fa-lg mr-3"></i>Books</a>
+                  <a href="{{route('myBooks')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-book-reader text-light fa-lg mr-3"></i>Manage Books</a>
                 </li>
               @endhasrole
               
@@ -82,12 +82,12 @@
                 </li>
                 @endhasrole
 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="{{route('slider')}}" id="slider" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-folder-plus text-light fa-lg mr-3"></i>Slider</a>
                 </li>
                 <li class="nav-item">
                   <a href="{{route('user')}}" id="user" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="far fa-user-circle text-light fa-lg mr-3"></i>User Request</a>
-                </li>
+                </li> -->
                 <!-- <li class="nav-item">
                   <a href="" id="slider" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-file-alt text-light fa-lg mr-3"></i>User Review</a>
                 </li> -->

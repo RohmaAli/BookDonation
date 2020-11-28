@@ -18,10 +18,10 @@ class CustomerController extends Controller
 
     public function dashboard()
     {
-        $user = auth()->user();
-        $books = Book::where('user_id', '=', $user->id); 
-        $count = $books->count();  
-        return view('customer.index',compact('books', 'count'));
+        // $user = auth()->user();
+        // $books = Book::where('user_id', '=', $user->id); 
+        // $count = $books->count();  
+        return view('customer.index');
     }
     
    
@@ -129,38 +129,45 @@ class CustomerController extends Controller
         $pivotTable = \DB::table('book_customer');
         
         // dd($pivotTable->count());
-        // $pivotData =  \DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', $recipient->id)->get();
+        $pivotData =  \DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', $recipient->id)->get();
         // foreach($pivotData as $data)
         //     {
         //         $permission = $data->hasPermission;
         //     }
         //     dd($permission);
-        if($pivotTable->count() == 0) //first time DB == empty
-        {
+        // if($pivotTable->count() == 0) //first time DB == empty
+        // {
            
-            $book->customers()->attach($recipient, ['hasPermission' => '0']);      
-            $bookowner->notify(new RequestNotification($book, $recipient));
-            // $clicks = 1;
-            // return "done";
-            $books = $category->books; 
-            $permission = 0; 
-            return view('customer.viewCatwiseBooks',compact('books','category'));
-        }
-        elseif($pivotTable->count() > 0)  //pivot has data
-        {
-            $book->customers()->attach($recipient, ['hasPermission' => '0']);      
-            $bookowner->notify(new RequestNotification($book, $recipient));
-            // return "done";
-            $books = $category->books;
-            $pivotData =  \DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', $recipient->id)->get();
-            foreach($pivotData as $data)
-            {
-                $permission = $data->hasPermission;
-            }
-             
-            return view('customer.viewCatwiseBooks',compact('books','category'));
+            // $book->customers()->attach($recipient, ['hasPermission' => '0']);      
+            // $bookowner->notify(new RequestNotification($book, $recipient));
+        //     $books = $category->books; 
+        //     $permission = 0; 
+        //     return view('customer.viewCatwiseBooks',compact('books','category'));
+        // }
+        // elseif($pivotTable->count() > 0)  //pivot has data
+        // {
+            // $pivotData =  \DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', $recipient->id)->get();
+            // if($pivotData->count() == 1)
+            // {
+            //     $books = $category->books;
+            //     return view('customer.viewCatwiseBooks',compact('books','category'));
+            // }
+            // else
+            // {  
+                // $notification = auth()->user()->notifications->where();
+                $bookowner->notify(new RequestNotification($book, $recipient));   
+                $books = $category->books;
+                // foreach($pivotData as $data)
+                // {
+                //     $permission = $data->hasPermission;
+                // }
+                 
+                return view('customer.viewCatwiseBooks',compact('books','category'));
+            // }
+            // $book->customers()->attach($recipient, ['hasPermission' => '0']);      
+           
 
-        }
+        // }
         
         
 

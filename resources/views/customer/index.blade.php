@@ -20,104 +20,74 @@
 
 <section>
 
-<article class="col-xl-10 col-12" style="margin-left:200px; margin-top:100px">
+<article class="col-xl-10 col-10" style="margin-left:200px; margin-top:0px">
 
-<div class="row">
-                                <!-- <div class="col-xl-4">
-                            
-                                    
-                                </div> -->
-                                <div class="col-xl-10">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="card mini-stats-wid">
-                                                <div class="card-body">
-                                                    <div class="media">
-                                                        <div class="media-body">
-                                                            <p class="text-muted font-weight-medium">My Total Books</p>
-                                                            <h4 class="mb-0" style="color:green">{{$count}} pkr/-</h4>
-                                                        </div>
 
-                                                        <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                                            <span class="avatar-title">
-                                                                <i class="bx bx-copy-alt font-size-24"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mini-stats-wid">
-                                                <div class="card-body">
-                                                    <div class="media">
-                                                        <div class="media-body">
-                                                            <p class="text-muted font-weight-medium">Amount Recieved</p>
-                                                            <h4 class="mb-0" style="color:green"> pkr/-</h4>
-                                                        </div>
+<!-- Cards -->
+<section>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-10 col-xl-10 col-md-8 ml-auto">
+              <div class="row pt-md-5 mb-md-5 mt-3">
 
-                                                        <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
-                                                            <span class="avatar-title rounded-circle bg-primary">
-                                                                <i class="bx bx-archive-in font-size-24"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="card mini-stats-wid">
-                                                <div class="card-body">
-                                                    <div class="media">
-                                                        <div class="media-body">
-                                                            <p class="text-muted font-weight-medium">Amount Credit</p>
-                                                            <h4 class="mb-0" style="color:green"> pkr/-</h4>
-                                                        </div>
+                <div class="col-xl-6 col-sm-6 p-2">
+                  <div class="card card-common">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <i class="fas fa-book fa-3x text-info"></i>
 
-                                                        <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
-                                                            <span class="avatar-title rounded-circle bg-primary">
-                                                                <i class="bx bx-purchase-tag-alt font-size-24"></i>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end row -->
+                        <div class="text-right text-secondary">
+                        @php
+                          $books = DB::table('books');
+                          $customers = DB::table('customers')
 
-                                </div>
+                        @endphp
+                          <h5>Total Books Available</h5>
+                          <h3>{{$books->count()}}</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="card-footer text-secondary">
+                   <i class="fas fa-sync mr-3"></i>
+                   <span>Update Now</span>
+                 </div> -->
+                  </div>
+                </div>
+                <div class="col-xl-6 col-sm-6 p-2">
+                  <div class="card card-common">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <i class="fas fa-book fa-3x text-warning "></i>
+                        <div class="text-right text-secondary">
+                        @php 
+                            $mybooks = DB::table('books')->where('user_id', auth()->user()->id)
+                        @endphp
+                          <h5>My books</h5>
+                          <h3>{{$mybooks->count()}}</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="card-footer text-secondary">
+                   <i class="fas fa-sync mr-3"></i>
+                   <span>Update Now</span>
+                 </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <!-- end of cards -->
                             </div>
 
+                            <div class="container-fluid">
+        <div class="row">
+          <img style="margin-left:100px; margin-top: 0px" width="900px" height="300px" src="images/book.jpg" alt="">
+        </div>
+        </div>
 
 
-<h3 class="text-muted text-center mb-3"> Books</h3>
-<form action="route('delete')" method="POST">
-@csrf
-<table class="table text-center table-dark table-hover">
-    <thead>
-        <tr class="text-muted">
-        <th>#</th>
-        <!-- <th>Book Name</th> -->
-        <th>Category</th>
-        <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-    @if($books ?? '')
-    @foreach($books ?? '' as $book)
-    {{$book}}
-            <tr>
-                <th>1</th>
-                <td>{{$book->title}}</td>
-                <td>{{$book->category}}</td>
-                <td><button type="button" class="badge btn-danger w-100 py-2" name="bookID" value="{{$book->id}}">Delete</button></td>
-            </tr>
-    @endforeach
-    @endif
-    </tbody>
-</table>
-</form>
 </article>
 </section>
 

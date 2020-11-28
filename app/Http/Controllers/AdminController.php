@@ -8,6 +8,7 @@ use Webpatser\Uuid\Uuid;
 use App\Book;
 use App\User;
 use Auth;
+use Carbon;
 use DB;
 use App\Customer;
 class AdminController extends Controller
@@ -26,12 +27,12 @@ class AdminController extends Controller
   }
   public function category()
   {
-    $categories = Category::all();
+    $categories = Category::paginate(5);
     return view ("admin.category", compact('categories'));
   }
   public function books()
   {
-    $books = Book::all();
+    $books = Book::paginate(5);
     return view ("admin.books", compact('books'));
   }
   public function slider()
@@ -135,9 +136,17 @@ class AdminController extends Controller
       {
         $book = Book::find($request->allow);
         $customer = Customer::find($request->cid);
-        $pivotData =  DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', $customer->id)->update(['hasPermission' => 1]);
-        
-        
+        $book->customers()->attach($customer, ['hasPermission' => '1']);      
+
+        $pivotTable = \DB::table('book_customer');
+        // $pivotData =  DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', $customer->id)->update(['hasPermission' => 1]);
+     
+        $notification = auth()->user()->notifications->find($request->nid);
+        if($notification)
+        {
+          $notification->markAsRead();
+        }
+        return view('admin.viewRequest');
       }
       
 

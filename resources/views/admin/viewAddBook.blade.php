@@ -34,7 +34,7 @@
 
                         Cover File:
                         <br>
-                        <input type="file" name="cover">
+                        <input type="file" name="cover" required>
 
                         <br><br>
 
