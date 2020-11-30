@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Contact;
 
 class WelcomeController extends Controller
 {
@@ -32,5 +33,18 @@ class WelcomeController extends Controller
     {
       return view ('stories');
     }
+
+    public function storeContact(Request $request)
+    {
+      // return $request;
+      $contact = new Contact();
+      $contact->firstName = $request->fname;
+      $contact->lastName = $request->lname;
+      $contact->message = $request->message;
+      $contact->email = $request->email;
+      $contact->subject = $request->subject;
+      $contact->save();
+      return redirect()->back();
+     }
 
 }

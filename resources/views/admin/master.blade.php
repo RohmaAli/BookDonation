@@ -80,6 +80,10 @@
               <li class="nav-item">
                   <a href="{{route('admin.viewRequest')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-share text-light fa-lg mr-3"></i>Requests</a>
                 </li>
+                <li>
+                <a href="{{route('viewMessages')}}" id="books" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-envelope-open-text text-light fa-lg mr-3"></i>Messages</a>
+
+                </li>
                 @endhasrole
 
                 <!-- <li class="nav-item">
@@ -129,11 +133,11 @@
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   <i class="fa fa-bell"></i>
-                                  <span class="count">{{auth()->user()->notifications()->count()}}</span>
+                                  <span class="count">{{auth()->user()->unreadNotifications->count()}}</span>
                       </button>
                       <div class="dropdown-menu" aria-labelledby="notification" style="overflow-y: scroll;height: 50vh">
-                        <p ><center style="color:green">You have {{auth()->user()->notifications()->count()}} Notifications</center></p>
-                        @foreach(auth()->user()->notifications as $notification)
+                        <p ><center style="color:green">You have {{auth()->user()->unreadNotifications->count()}} Notifications</center></p>
+                        @foreach(auth()->user()->unreadNotifications as $notification)
                                 <a class="dropdown-item media" href="{{route('admin.viewRequest')}}">
                                     <i class="fa fa-check"></i>
                                     <div class="">

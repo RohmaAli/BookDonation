@@ -109,6 +109,9 @@ class CustomerController extends Controller
     {
         $category = Category::find($id);
         $books = $category->books;
+
+        // $books = $category->books->where('user_id', '!=', auth()->user()->id);
+        
         $pivotTable = \DB::table('book_customer');
         // if($pivotTable->count() == 0)
         // {
@@ -157,6 +160,8 @@ class CustomerController extends Controller
                 // $notification = auth()->user()->notifications->where();
                 $bookowner->notify(new RequestNotification($book, $recipient));   
                 $books = $category->books;
+                // $books = $category->books->where('user_id', '!=', auth()->user()->id);
+
                 // foreach($pivotData as $data)
                 // {
                 //     $permission = $data->hasPermission;

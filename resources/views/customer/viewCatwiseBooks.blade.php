@@ -51,8 +51,12 @@
                           }
                         }
                        @endphp
-                       @if($permission == 0)
+                       @if($permission == 0) 
+                          @if($book->user_id != auth()->user()->id)
                         <a href="{{ url('/customer/request/book', $book->id) }}" type="button" class="btn btn-success"><i class="fas fa-share"></i></a>
+                          @else
+                          <p style="color:green">you are the owner of this book</p> 
+                          @endif
                           @elseif($permission == 1)
                           <a href="{{ url('/customer/download/book', $book->uuid) }}" type="button" class="btn btn-success"><i class="fa fa-download"></i></a>
                         @endif

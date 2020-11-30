@@ -48,7 +48,7 @@
                       <td>{{++$i}}</td>
                        <td>{{$book->title}}</td>
                        <td>{{$book->category->title}}</td>
-                       <td></td>
+                       
                        <td>
                        <a href="{{ url('/admin/download/book', $book->uuid) }}" type="button" class="btn btn-success"><i class="fa fa-download"></i></a>
                        <a href="{{ url('/admin/delete/book', $book->id) }}" type="button" class="btn btn-success"><i class="fa fa-trash"></i></a>

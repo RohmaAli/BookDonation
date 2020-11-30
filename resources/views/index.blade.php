@@ -217,23 +217,26 @@
           <div class="col-md-12 m-auto">
             <h1 class="text-center text-white font-weight-bold">CONTACT US</h1>
             <div class="underline"></div>
-            <form class="my-5" action="" method="post">
+            <form class="my-5" action="{{route('storeContact')}}" method="POST">
+            @csrf
               <div class="form-group col-md-6 m-auto">
-                <input type="text" class="form-control mb-3" name="" placeholder="First Name">
+                <input type="text" class="form-control mb-3" name="fname" placeholder="First Name">
               </div>
               <div class="form-group col-md-6 m-auto">
-                <input class="form-control mb-3" type="text" name="" placeholder="Last Name">
+                <input class="form-control mb-3" type="text" name="lname" placeholder="Last Name">
               </div>
               <div class="form-group col-md-6  m-auto">
-                <input type="email" class="form-control mb-3" name="" placeholder="Email">
+                <input type="email" class="form-control mb-3" name="email" placeholder="Email">
               </div>
               <div class="form-group col-md-6 m-auto">
-                <input class="form-control mb-3" type="text" name="" placeholder="Subject">
+                <input class="form-control mb-3" type="text" name="subject" placeholder="Subject">
               </div>
               <div class="form-group col-md-6 m-auto">
-                <textarea class="form-control mb-4 " name="name" placeholder="Enter your messege here...." rows="8" cols="80"></textarea>
+                <textarea class="form-control mb-4 " name="message" placeholder="Enter your messege here...." rows="8" cols="80"></textarea>
               </div>
-              <a style="border-radius: 10px !important; padding: 10px;" type="submit" class="col-md-4 btn btn-block bg-info m-auto text-light font-weight-bold">Subscribe</a>
+              <button type="submit" style="border-radius: 10px !important; padding: 10px;" class="col-md-4 btn btn-block bg-info m-auto text-light font-weight-bold">Send Message</button>
+
+              <!-- <a style="border-radius: 10px !important; padding: 10px;" type="submit" class="col-md-4 btn btn-block bg-info m-auto text-light font-weight-bold">Subscribe</a> -->
             </form>
           </div>
         </div>

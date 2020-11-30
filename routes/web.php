@@ -34,6 +34,7 @@ Route::get('/stories', 'WelcomeController@stories')->name('stories');
 
 //Admin Side
 Route::middleware(['role:super_admin'])->group(function(){
+    
 Route::get('/admin', 'AdminController@index')->middleware('auth')->name('admin-index');
 Route::get('/mailbox', 'AdminController@mailbox')->name('mailbox');
 Route::get('/category', 'AdminController@category')->name('category');
@@ -50,7 +51,7 @@ Route::get('/admin/download/book/{uuid}', 'AdminController@downloadBookAdmin')->
 Route::get('/admin/delete/book/{id}', 'AdminController@deleteBookAdmin')->name('admin.deleteBook');
 Route::get('/admin/view/request', 'AdminController@viewRequestAdmin')->name('admin.viewRequest');
 Route::post('/admin/request/actions','AdminController@requestAction')->name('admin.requestAction');
-
+Route::get('/admin/view/messages','AdminController@viewMessages')->name('viewMessages');
 
 });
 
@@ -60,6 +61,7 @@ Route::post('/admin/request/actions','AdminController@requestAction')->name('adm
 
 //customer routes
 Route::middleware(["role:customer"])->group(function(){
+
 Route::get('/index', 'CustomerController@index');
 Route::get('/customer/dashboard', 'CustomerController@dashboard')->name('dashboard');
 Route::get('/customer/category', 'CustomerController@category')->name('c_category');
@@ -73,9 +75,8 @@ Route::get('/customer/view/categorywise/books/{id}','CustomerController@catwiseB
 Route::get('/customer/request/book/{id}', 'CustomerController@requestBook')->name('customer.reqBook');
 
 });
-// Route::resource('index', 'BookController@index');
-// Route::resource('/customer/create/store', 'BookController@store', ['as' => 'store']);
-// Route::resource('store', 'BookController@store');
+
+Route::post('/store/contact', 'WelcomeController@storeContact')->name('storeContact');
 
 Route::get('/assignRole', function(){
 

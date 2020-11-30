@@ -8,7 +8,7 @@
   <div class="container-fluid bg-dark p-5 contact">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="text-center text-white mt-5 fontweight-bold">Ctegories</h1>
+        <h1 class="text-center text-white mt-5 fontweight-bold">Categories</h1>
         <div class="underline mb-5"></div>
       </div>
     </div>

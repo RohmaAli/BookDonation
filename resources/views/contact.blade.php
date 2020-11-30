@@ -36,6 +36,7 @@
       </div>
       <div class="col-md-6">
         <div class="contact-info">
+        
 							<h4>Working Hours</h4>
 							<ul>
 								<li>
@@ -57,37 +58,42 @@
 							</ul>
 						</div>
       </div>
+      
       <div class="m-auto">
-        <form class="text-white">
+      <form action="{{route('storeContact')}}" method="POST" class="text-white">
+      @csrf
           <div class="form-row text-white">
             <div class="col-md-6 mb-3">
               <label for="validationDefault01">First name</label>
-              <input type="text" class="form-control" id="validationDefault01" placeholder="First Name*" required>
+              <input type="text" name="fname" class="form-control" id="validationDefault01" placeholder="First Name*" required>
             </div>
             <div class="col-md-6 mb-3">
               <label for="validationDefault02">Last name</label>
-              <input type="text" class="form-control" id="validationDefault02" placeholder="Last Name*"  required>
+              <input type="text" name="lname" class="form-control" id="validationDefault02" placeholder="Last Name*"  required>
             </div>
           </div>
           <div class="form-row">
             <div class="col-md-6 mb-3">
               <label for="validationDefault03">Email</label>
-              <input type="Email" class="form-control" id="validationDefault03" placeholder="Email*" required>
+              <input type="Email" name="email" class="form-control" id="validationDefault03" placeholder="Email*" required>
             </div>
             <div class="col-md-6 mb-3">
               <label for="validationDefault05">Subject</label>
-              <input type="text" class="form-control" id="validationDefault05" placeholder="Subject*" required>
+              <input type="text" name="subject" class="form-control" id="validationDefault05" placeholder="Subject*" required>
             </div>
           </div>
           <div class="form-group">
           </div>
           <div class="form-group">
             <label for="validationDefault05">Message</label>
-            <textarea id="validationDefault05" placeholder="Your message*...." class="form-control" required name="name" rows="8" cols="80"></textarea>
+            <textarea id="validationDefault05" placeholder="Your message*...." class="form-control" required name="message" rows="8" cols="80"></textarea>
           </div>
-            <a style="border-radius: 10px !important; padding: 10px;" type="submit" class="col-md-4 btn btn-block bg-info m-auto text-light font-weight-bold">Send Message</a>
-        </form>
+            <button type="submit" style="border-radius: 10px !important; padding: 10px;" class="col-md-4 btn btn-block bg-info m-auto text-light font-weight-bold">Send Message</button>
+            <!-- <a style="border-radius: 10px !important; padding: 10px;" type="submit" class="col-md-4 btn btn-block bg-info m-auto text-light font-weight-bold">Send Message</a> -->
+            </form>
       </div>
+      
+      
     </div>
   </div>
   <div class="container-fluid">

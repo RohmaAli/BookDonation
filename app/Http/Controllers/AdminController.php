@@ -8,6 +8,7 @@ use Webpatser\Uuid\Uuid;
 use App\Book;
 use App\User;
 use Auth;
+use App\Contact;
 use Carbon;
 use DB;
 use App\Customer;
@@ -78,6 +79,7 @@ class AdminController extends Controller
   {
     $category = Category::find($request->editCat);
     $category->title = $request->ctitle;
+    $category->description = $request->des;
     $category->save();
     return redirect()->route('category');
 
@@ -136,20 +138,44 @@ class AdminController extends Controller
       {
         $book = Book::find($request->allow);
         $customer = Customer::find($request->cid);
-        $book->customers()->attach($customer, ['hasPermission' => '1']);      
+        $record = DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', $customer->id);
+        $record = $record->first();
+        // return $record->count();
+        if(!$record)
+        {
+          // return "not";
+          $book->customers()->attach($customer, ['hasPermission' => '1']);      
+          $notification = auth()->user()->notifications->find($request->nid);
+        if($notification)
+        {
+          $notification->markAsRead();
+        }
+        }
 
-        $pivotTable = \DB::table('book_customer');
+        // $pivotTable = \DB::table('book_customer');
         // $pivotData =  DB::table('book_customer')->where('book_id', $book->id)->where('customer_id', $customer->id)->update(['hasPermission' => 1]);
      
+        
+        return view('admin.viewRequest');
+      }
+      elseif($request->deny)
+      {
         $notification = auth()->user()->notifications->find($request->nid);
         if($notification)
         {
           $notification->markAsRead();
         }
         return view('admin.viewRequest');
+
       }
       
 
+    }
+
+    public function viewMessages()
+    {
+      $messages = Contact::paginate(5);
+      return view('admin.viewMessages', compact('messages'));
     }
 
 }

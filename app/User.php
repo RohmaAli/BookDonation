@@ -42,7 +42,7 @@ class User extends Authenticatable
 
     public function books()
     {
-        return $this->hasMany('App\Book');
+        return $this->hasMany('App\Book'); //one to many
     }
 
     public function customer()

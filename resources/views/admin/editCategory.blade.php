@@ -43,7 +43,7 @@
                                                     <input id="ctitle" name="ctitle" type="text" class="form-control" value="{{$category->title}}">
                                                     <br>  
                                                     <label  for="des">Description</label><br>
-                                                    <textarea name="description" id="des" class="form-control" cols="60" rows="5"></textarea>
+                                                    <textarea name="des" id="des" class="form-control" cols="60" rows="5">{{$category->description}}</textarea>
                                                     <!-- <input id="des" name="description" type="text" class="form-control" placeholder="(optional)"> -->
                                                     <br>  
                                                     <button type="submit" name="editCat" class="form-control btn btn-primary mr-1 waves-effect waves-light" value="{{$category->id}}"> Save changes</button>
